@@ -7,6 +7,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import arviz as az
 
+import pymc as pm
+
 import json
 import time
 
@@ -81,7 +83,7 @@ def experiment_simulations(variant_a_cr, variant_b_cr, n=100, prior_alpha=1, pri
     # Return the concatenated result after all simulations are completed
     return result
 
-def plot_sample_size_required(baseline_cr=.1, mde=.01, power_threshold=80, num_simulations=2):
+def plot_sample_size_required(baseline_cr=.1, mde=.01, power_threshold=80, num_simulations=5):
     # Set up the plot with seaborn style
     sns.set(style="whitegrid")
     plt.figure(figsize=(11, 6))
@@ -184,10 +186,6 @@ def plot_sample_size_required(baseline_cr=.1, mde=.01, power_threshold=80, num_s
 
         # Display the statistics in a table format
         st.table(stats_df)
-
-import pymc as pm
-import arviz as az
-import pandas as pd
 
 def calculate_ab_test(variant_a_conversions, variant_a_samples, variant_b_conversions, variant_b_samples):
     with pm.Model() as model:
